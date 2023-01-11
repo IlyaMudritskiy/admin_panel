@@ -1,12 +1,17 @@
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
-
-load_dotenv()
+from dotenv import dotenv_values
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = os.getenv("DJANGO_KEY")
+
+# Import env values for Django
+django_env = dotenv_values(f"{BASE_DIR}/env_files/django_app.env")
+
+# Import PostgreSQL env values for DATABASES
+postgres_env = dotenv_values(f"{BASE_DIR}/env_files/postgres.env")
+
+SECRET_KEY = django_env["DJANGO_KEY"]
 DEBUG = True
 ALLOWED_HOSTS = []
 
@@ -52,11 +57,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
-        'PORT': os.environ.get('DB_PORT', 5432),
+        'NAME': postgres_env['POSTGRES_DB'],
+        'USER': postgres_env['DB_USER'],
+        'PASSWORD': postgres_env['DB_PASSWORD'],
+        'HOST': postgres_env['POSTGRES_HOST'],
+        'PORT': int(postgres_env['POSTGRES_PORT']),
         'OPTIONS': {
             'options': '-c search_path=public,content'
         }
