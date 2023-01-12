@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 from dotenv import dotenv_values
@@ -15,12 +14,12 @@ postgres_env = dotenv_values(f"{BASE_DIR}/env_files/postgres.env")
 
 SECRET_KEY = django_env["DJANGO_KEY"]
 DEBUG = django_env["DEBUG"]
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = django_env["ALLOWED_HOSTS"]
 
 include(
     "components/installed_apps.py"
     "components/middleware.py"
-    )
+)
 
 ROOT_URLCONF = "config.urls"
 
