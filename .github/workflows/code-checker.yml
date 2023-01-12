@@ -3,11 +3,11 @@ on: [push]
 jobs:
   linter:
     name: Linter
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
     - name: Install Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: 3.11
     - name: Install dependencies
