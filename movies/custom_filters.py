@@ -41,7 +41,6 @@ class CreationDateListFilter(admin.SimpleListFilter):
     dates = tuple(
         (cur_year for cur_year in range(1980, datetime.now().year + 10, 10)),
     )
-    print(dates)
 
     def lookups(self, request, model_admin):
         return (
