@@ -10,8 +10,8 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - db:/var/lib/postgresql/data
-      - ./utils/init_movies_database.sql:/docker-entrypoint-initdb.d/init.sql
+    - ./utils/init_movies_db.sql:/docker-entrypoint-initdb.d/init.sql
+    - db:/var/lib/postgresql/data
 
 volumes:
   db:
