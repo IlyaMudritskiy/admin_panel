@@ -14,16 +14,19 @@ postgres_env = dotenv_values(f"{BASE_DIR}/env_files/postgres.env")
 
 SECRET_KEY = django_env["DJANGO_KEY"]
 DEBUG = django_env["DEBUG"]
-ALLOWED_HOSTS = django_env["ALLOWED_HOSTS"]
+ALLOWED_HOSTS = []
 
+# INSTALLED_APPS
+# MIDDLEWARE
 include(
-    "components/installed_apps.py"
-    "components/middleware.py"
+    f"{BASE_DIR}/config/components/installed_apps.py",
+    f"{BASE_DIR}/config/components/middleware.py"
 )
 
 ROOT_URLCONF = "config.urls"
 
-include("componenst/templates.py")
+# TEMPLATES
+include(f"{BASE_DIR}/config/components/templates.py")
 
 WSGI_APPLICATION = "config.wsgi.application"
 
@@ -31,8 +34,8 @@ DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': postgres_env['POSTGRES_DB'],
-        'USER': postgres_env['DB_USER'],
-        'PASSWORD': postgres_env['DB_PASSWORD'],
+        'USER': postgres_env['POSTGRES_USER'],
+        'PASSWORD': postgres_env['POSTGRES_PASSWORD'],
         'HOST': postgres_env['POSTGRES_HOST'],
         'PORT': int(postgres_env['POSTGRES_PORT']),
         'OPTIONS': {
@@ -41,7 +44,8 @@ DATABASES = {
     }
 }
 
-include("components/auth_password_validators.py")
+# AUTH_PASSWORD_VALIDATORS
+include(f"{BASE_DIR}/config/components/auth_password_validators.py")
 
 LANGUAGE_CODE = "en-us"
 
