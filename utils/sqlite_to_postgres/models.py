@@ -6,7 +6,7 @@ from datetime import datetime
 @dataclass(frozen=True)
 class Genre:
     name: str
-    description: str = ""
+    description: str = "No description"
     id: uuid.UUID = field(default_factory=uuid.uuid4)
     created: datetime = field(default_factory=datetime.now)
     modified: datetime = field(default_factory=datetime.now)
@@ -26,7 +26,7 @@ class FilmWork:
     file_path: str
     type: str
     creation_date: str
-    description: str = ""
+    description: str = "No description"
     rating: float = 0.0
     id: uuid.UUID = field(default_factory=uuid.uuid4)
     created: datetime = field(default_factory=datetime.now)
